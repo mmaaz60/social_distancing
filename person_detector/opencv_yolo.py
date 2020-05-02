@@ -8,24 +8,25 @@ class OpenCVYolo:
     https://github.com/mmaaz60/darknet repository.
     """
 
-    def __init__(self, classes_file, config_file, weights_file):
+    def __init__(self, checkpoint_path):
         """
         This function loads the Darknet YOLO model using OpenCV DNN module
 
-        :param classes_file: Path to txt file containing the names of all classes of the detection network with
-        one name per class in eah line.
-        :param config_file: Path to darknet configuration (.cfg) file of the detection network
-        :param weights_file: Path to trained weights (.weights) file of the detection network
+        :param checkpoint_path: Path to the checkpoints directory. In case of OpenCV Yolo, checkpoints directory must
+        contains a three files, classed.txt, yolo.cfg, yolo.weights.
+        :classes.txt: File containing the names of all classes of the network with one class name per line of file.
+        :yolo.cfg: Darknet configuration (.cfg) file of the Yolo detection network
+        :yolo.weights: Darknet trained weights (.weights) file of the Yolo detection network
 
         :return: None
         """
         # Read the classes file
-        with open(classes_file) as f:
+        with open(f"{checkpoint_path}/classes.txt") as f:
             self.classes = [line.strip() for line in f.readlines()]
         # Load the model using OpenCV DNN module
-        self.model = cv2.dnn.readNetFromDarknet(config_file, weights_file)
+        self.model = cv2.dnn.readNetFromDarknet(f"{checkpoint_path}/yolo.cfg", f"{checkpoint_path}/yolo.weights")
         # Get the model input size from .cfg file
-        configurations = OpenCVYolo.get_model_input_size(config_file)
+        configurations = OpenCVYolo.get_model_input_size(f"{checkpoint_path}/yolo.cfg")
         self.width, self.height = int(configurations["width"]), int(configurations["height"])
         # Get the model's output layers
         layer_names = self.model.getLayerNames()
