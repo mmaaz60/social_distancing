@@ -1,0 +1,5 @@
+person_detector:
+  name: opencv_yolo
+  checkpoint_path: ./yolov3
+
+image_transformation: homography
