@@ -6,8 +6,9 @@ Stay tuned, a robust and modular implementation of Social Distancing Violation d
 
 # TODO
 - [x] Add OpenCV darknet Yolov3 as person detector
-- [ ] Add instructions to add custom person detector into the project
 - [x] Add Homography Image Transformation as a module to generate transformation matrix for bird eye view projection
 - [ ] Add calibration tool to map camera image to bird eye view
 - [ ] Develop an end-to-end application flow to detect social distancing violations using above tools
+- [ ] Add instructions to add custom person detector into the project
+- [ ] Add instructions to add any other image transformation (e.g. perspective transformation etc.)
 - [ ] Add MGAN based person detector from [Pedestron](https://github.com/hasanirtiza/Pedestron.git)
