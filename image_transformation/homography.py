@@ -1,10 +1,7 @@
-import numpy as np
-import cv2
-
-
 class Homography:
     def __init__(self):
-        pass
+        from cv2 import findHomography as transformation
+        self.transformation = transformation
 
     def calculate_transform(self, src_pts, dst_pts):
-        pass
+        return self.transformation(src_pts, dst_pts)
