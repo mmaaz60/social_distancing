@@ -4,6 +4,11 @@ This repository implements the social distancing violation detection to reduce t
 # To Be Continue
 Stay tuned, a robust and modular implementation of Social Distancing Violation detection is coming soon.
 
+# Image Transformation
+![Camera view to Top view Transformation](media/image_transformation.png)
+
+Note that the road is perfectly aligned in the above transformed image.
+
 # TODO
 - [x] Add OpenCV darknet Yolov3 as person detector
 - [x] Add Homography Image Transformation as a module to generate transformation matrix for bird eye view projection
