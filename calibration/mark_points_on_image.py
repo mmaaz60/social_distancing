@@ -21,6 +21,8 @@ class MarkPoints:
             cv2.imshow("Image", self.data['image'])
 
     def mark_points(self, num_points):
+        cv2.imshow("Image", self.image)
+
         self.data['image'] = self.image.copy()
         self.data['points'] = []
         self.data['required_points'] = num_points
