@@ -17,3 +17,6 @@ Note that the road is perfectly aligned in the above transformed image.
 - [ ] Add instructions to add custom person detector into the project
 - [ ] Add instructions to add any other image transformation (e.g. perspective transformation etc.)
 - [ ] Add MGAN based person detector from [Pedestron](https://github.com/hasanirtiza/Pedestron.git)
+
+# Collaboration
+I am looking for the resources to collaborate with me on this project. Please email me at **mmaaz60@gmail.com** if you want to collaborate with me on this project.
