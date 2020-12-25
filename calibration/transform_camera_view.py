@@ -9,7 +9,8 @@ class TransformCameraView:
         self.camera_image = cv2.resize(camera_view_image, (640, 360))
         self.top_view_size = (360, 360, 3)
         self.top_view = np.zeros(self.top_view_size, np.uint8)
-        self.camera_view_points = self.top_view_points = None
+        self.camera_view_points = None
+        self.top_view_points = None
         self.transformation_metrics = None
         self.transformed_image = None
 
