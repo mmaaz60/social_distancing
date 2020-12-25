@@ -11,7 +11,7 @@ class TransformCameraView:
         self.top_view = np.zeros(self.top_view_size, np.uint8)
         self.camera_view_points = None
         self.top_view_points = None
-        self.transformation_metrics = None
+        self.transformation_matrix = None
         self.transformed_image = None
 
     def mark_points_on_camera_view_image(self, num_points):
@@ -25,10 +25,10 @@ class TransformCameraView:
     def calculate_transformation(self):
         transform = Transform()
         transformation = transform.calculate_transform(self.camera_view_points, self.top_view_points)
-        self.transformation_metrics = transformation[0]
+        self.transformation_matrix = transformation[0]
 
     def generate_transformed_image(self):
-        self.transformed_image = cv2.warpPerspective(self.camera_image, self.transformation_metrics,
+        self.transformed_image = cv2.warpPerspective(self.camera_image, self.transformation_matrix,
                                                      self.top_view_size[0:2])
 
     def display_camera_image_on_top_view(self):
