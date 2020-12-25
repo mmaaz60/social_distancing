@@ -1,6 +1,8 @@
 import sys
+import os
 import argparse
 import cv2
+import pickle
 from config.config import Configuration
 from calibration.transform_camera_view import TransformCameraView
 
@@ -43,3 +45,8 @@ if __name__ == "__main__":
     calibrator.calculate_transformation()
     calibrator.generate_transformed_image()
     calibrator.display_camera_image_on_top_view()
+    # Save the transformation object as pkl file
+    if not os.path.exists("./data"):
+        os.mkdir("./data")
+    with open(f"./data/calibration.pkl", 'wb') as f:
+        pickle.dump(calibrator, f)
