@@ -1,6 +1,6 @@
 person_detector:
   name: opencv_yolo
-  checkpoint_path: ./data/yolov3_tiny
+  checkpoint_path: ./data/yolov4_tiny
 
 image_transformation: homography
 

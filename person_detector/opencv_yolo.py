@@ -42,7 +42,6 @@ class OpenCVYolo:
 
         :return: List of person bounding boxes ([[x, y, w, h, confidence], ...])
         """
-        is_person = False  # Flag to indicate if is there any person in the image or not
 
         h, w, _ = image.shape  # Get the input image shape
         # Create input blob
@@ -58,8 +57,8 @@ class OpenCVYolo:
         boxes = []
         # Iterate through outputs and append person bounding boxes into boxes
         for out in outs:
-            detection__confidences = out[:, 5:]
-            score = np.amax(detection__confidences, axis=1)
+            detection_confidences = out[:, 5:]
+            score = np.amax(detection_confidences, axis=1)
             out_mask = [score > confidence_threshold]
             out = out[tuple(out_mask)]
             for detection in out:
@@ -76,7 +75,7 @@ class OpenCVYolo:
                 if self.classes[class_id] == "person":
                     class_ids.append(class_id)
                     confidences.append(float(confidence))
-                    boxes.append([x, y, w, h])
+                    boxes.append([x, y, width, height])
         # Apply non-max suppression to suppress the weak and overlapping bounding boxes
         indices = cv2.dnn.NMSBoxes(boxes, confidences, confidence_threshold, nms_threshold)
         bboxes = []
@@ -84,9 +83,9 @@ class OpenCVYolo:
         if len(indices) > 0:
             # Loop over the indices to keep
             for i in indices.flatten():
-                x, y, w, h = boxes[i][0], boxes[i][1], boxes[i][2], boxes[i][3]  # Extract the bounding box
+                x, y, width, height = boxes[i][0], boxes[i][1], boxes[i][2], boxes[i][3]  # Extract the bounding box
                 confidence = confidences[i]
-                bboxes.append([x, y, w, h, confidence])  # Append the bounding box to bboxes
+                bboxes.append([x, y, width, height, confidence])  # Append the bounding box to bboxes
 
         return bboxes
 
