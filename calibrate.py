@@ -1,9 +1,8 @@
 import sys
-import os
 import argparse
 import cv2
 import pickle
-from config.config import Configuration
+from config.config import Configuration as config
 from calibration.transform_camera_view import TransformCameraView
 from calibration.scale_factor_estimation import ScaleFactorEstimator
 
@@ -40,7 +39,7 @@ def parse_arguments():
 
 if __name__ == "__main__":
     # Read program config
-    Configuration.load_config("./config.yml")
+    config.load_config("./config.yml")
     # Parse the command line arguments
     args = parse_arguments()
     video_path = args["video_path"]
@@ -61,7 +60,8 @@ if __name__ == "__main__":
     cal_obj = transform_camera_view(frame, num_points)
     scale_factor = calculate_scale_factor(frame, cal_obj.transformation_matrix, 2, num_iterations)
     # Save the transformation matrix and scale factor as pkl file
-    if not os.path.exists("./data"):
-        os.mkdir("./data")
-    with open(f"./data/calibration.pkl", 'wb') as f:
+    pkl_file_path = config.cfg["calibration"]["pkl_file_path"]
+    with open(pkl_file_path, 'wb') as f:
         pickle.dump([cal_obj.transformation_matrix, scale_factor], f)
+
+    print(f"Calibration completed and written to '{pkl_file_path}'.")
