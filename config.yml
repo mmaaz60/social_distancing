@@ -6,3 +6,6 @@ image_transformation: homography
 
 calibration:
   pkl_file_path: ./data/calibration.pkl
+
+social_distancing:
+  distance_threshold_ft: 4
