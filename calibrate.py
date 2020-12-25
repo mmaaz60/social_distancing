@@ -5,17 +5,27 @@ import cv2
 import pickle
 from config.config import Configuration
 from calibration.transform_camera_view import TransformCameraView
+from calibration.scale_factor_estimation import ScaleFactorEstimator
 
 
-def calibrate():
-    calibrator = TransformCameraView(frame)
-    calibrator.mark_points_on_camera_view_image(num_points)
-    calibrator.mark_points_on_top_view(num_points)
-    calibrator.calculate_transformation()
-    calibrator.generate_transformed_image()
-    calibrator.display_camera_image_on_top_view()
+def transform_camera_view(image, no_points):
+    transformer = TransformCameraView(image)
+    transformer.mark_points_on_camera_view_image(no_points)
+    transformer.mark_points_on_top_view(no_points)
+    transformer.calculate_transformation()
+    transformer.generate_transformed_image()
+    transformer.display_camera_image_on_top_view()
+    cv2.destroyAllWindows()
 
-    return calibrator
+    return transformer
+
+
+def calculate_scale_factor(image, transformation_matrix, no_points, iterations=4):
+    scale_factor_estimator = ScaleFactorEstimator(image, transformation_matrix)
+    for i in range(iterations):
+        scale_factor_estimator.mark_points(no_points)
+
+    return scale_factor_estimator.estimate_scale_factor()
 
 
 def parse_arguments():
@@ -44,10 +54,11 @@ if __name__ == "__main__":
         print(f"Invalid video path. Existing")
         sys.exit(1)
     video.release()
-    # Calibrate using TransformCameraView class
-    cal_obj = calibrate()
-    # Save the transformation object as pkl file
+    # Estimate the camera view to bird eye view transformation and scale factor
+    cal_obj = transform_camera_view(frame, num_points)
+    scale_factor = calculate_scale_factor(frame, cal_obj.transformation_matrix, 2)
+    # Save the transformation matrix and scale factor as pkl file
     if not os.path.exists("./data"):
         os.mkdir("./data")
     with open(f"./data/calibration.pkl", 'wb') as f:
-        pickle.dump(cal_obj, f)
+        pickle.dump([cal_obj.transformation_matrix, scale_factor], f)
