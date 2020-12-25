@@ -20,7 +20,7 @@ def transform_camera_view(image, no_points):
     return transformer
 
 
-def calculate_scale_factor(image, transformation_matrix, no_points, iterations=4):
+def calculate_scale_factor(image, transformation_matrix, no_points, iterations):
     scale_factor_estimator = ScaleFactorEstimator(image, transformation_matrix)
     for i in range(iterations):
         scale_factor_estimator.mark_points(no_points)
@@ -32,6 +32,8 @@ def parse_arguments():
     ap = argparse.ArgumentParser()
     ap.add_argument("-v", "--video_path", required=True, help="Path to video file.")
     ap.add_argument("-n", "--num_points", required=False, type=int, default=4, help="Number of calibration points.")
+    ap.add_argument("-iter", "--num_iterations", required=False, type=int, default=4,
+                    help="Number of iterations for finding the scale factor.")
 
     return vars(ap.parse_args())
 
@@ -43,6 +45,7 @@ if __name__ == "__main__":
     args = parse_arguments()
     video_path = args["video_path"]
     num_points = args["num_points"]
+    num_iterations = args["num_iterations"]
     # Read video and get the first frame
     video = cv2.VideoCapture(video_path)
     if video.isOpened():
@@ -56,7 +59,7 @@ if __name__ == "__main__":
     video.release()
     # Estimate the camera view to bird eye view transformation and scale factor
     cal_obj = transform_camera_view(frame, num_points)
-    scale_factor = calculate_scale_factor(frame, cal_obj.transformation_matrix, 2)
+    scale_factor = calculate_scale_factor(frame, cal_obj.transformation_matrix, 2, num_iterations)
     # Save the transformation matrix and scale factor as pkl file
     if not os.path.exists("./data"):
         os.mkdir("./data")
