@@ -6,7 +6,7 @@ from image_transformation.transform import Transform
 
 class TransformCameraView:
     def __init__(self, camera_view_image):
-        self.camera_image = cv2.resize(camera_view_image, (640, 360))
+        self.camera_image = camera_view_image
         self.top_view_size = (360, 360, 3)
         self.top_view = np.zeros(self.top_view_size, np.uint8)
         self.camera_view_points = None

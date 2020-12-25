@@ -5,7 +5,7 @@ from calibration.mark_points_on_image import MarkPoints
 
 class ScaleFactorEstimator:
     def __init__(self, camera_view_image, transformation_matrix):
-        self.camera_image = cv2.resize(camera_view_image, (640, 360))
+        self.camera_image = camera_view_image
         self.transformation_metrics = transformation_matrix
         self.camera_view_points = []
         self.top_view_points = []
