@@ -15,7 +15,7 @@ Note that the road is perfectly aligned in the above transformed image.
 - [x] Add calibration tool to map camera image to bird eye view
 - [x] Develop an end-to-end application flow to detect social distancing violations using above tools
 - [x] Add a bash script to run the end-to-end social distancing violation detector on a video
-- [ ] Add *requirements.txt*
+- [x] Add *requirements.txt*
 - [ ] Add complete instructions to run the code in the README  
 - [ ] Add instructions to add custom person detector into the project
 
