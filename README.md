@@ -1,5 +1,5 @@
 # Social Distancing
-This repository implements the social distancing violation detection to reduce the spread of COVID-19 and other diseases by ensuring social distancing in public places including shopping malls, hospitals and restaurants.
+This repository implements the social distance violation detection to reduce the spread of COVID-19 and other diseases by ensuring social distancing in public places including shopping malls, hospitals and restaurants.
 
 # Demo
 A demo video can be found at https://youtu.be/gXX8fuQbUFI. 
@@ -97,10 +97,10 @@ $ python calibrate.py -v /home/maaz/video.mp4 -n 4 -iter 2
 Then system will show you the transformed image. Now, you should press ENTER to begin the estimation of scale factor.
 1. Now the system will show you the camera view image, and you will mark 2 points (one at head and second at foot) of a person, and press ENTER.
 1. You will repeat the above step for one more time (total 2, as num_iterations = 2)
-1. That's all, now the system will save the calibration pkl file in at the path mentioned in the configuration file [config.yml](config.yml).
+1. That's all, now the system will save the calibration pkl file at the path mentioned in the configuration file [config.yml](config.yml).
 
 ## violation_detection.py
-This script will run the social distancing violation logic on a video and produced the violation video. 
+This script will run the social distance violation detection logic on a video and produced the violation video. 
 The script will draw a red line between two persons for which social distance violation is detected.
 Run the script as,
 ```
@@ -115,8 +115,8 @@ $ python violation_detection.py --help
 ```
 
 ## runme.sh
-This bash script is developed to provide an interactive way of performing calibration and running social distancing violation logic on a video. 
-Follow the below instructions,
+This bash script is developed to provide an interactive way of performing calibration and running social distance violation detection logic on a video. 
+To try, follow the below instructions,
 
 1. Make the script executable
 ```
@@ -126,28 +126,28 @@ $ sudo chmod +x ./runme.sh
 ```
 $ ./runme.sh <python_executable_path> <video_file_path> <calibration_file_path>
 ```
-Note that the script expect three (3) positional arguments, where the third argument (*calibration_file_path*) is optional. 
+Note that the script expects three (3) positional arguments, where the third argument (`calibration_file_path`) is optional. 
 If provided, the system will use this calibration file for core logic, otherwise the system will ask the user to perform the calibration first.
 
 For help, run
 ```
 $ ./runme help
 ```
-**NOTE:** *runme.sh* script is the preferred method of accessing the functionality of this repository.
+**NOTE:** `runme.sh` script is the preferred method of accessing the functionality of this repository.
 
 # Adding a Custom Person Detector
 All code related to `person_detector` can be found in the directory [person_detector](person_detector). 
 In order to add a new person detector, you need to do the following,
 1. Add a `.py` file (lets say `custom_person_detector.py`) in the `person_detector` directory. 
    This file should implement a `CustomPersonDetector` class. The class must contain a method named `do_inference`. 
-   The signature of the `do_inference` method are mentioned below
+   The signature of the `do_inference` method is mentioned below
    ```
    def do_inference(self, image, confidence_threshold, nms_threshold):
         """
         This function does inference on the image passed and return the person bounding boxes
 
-        :param image: A BGR numpy array (i.e. the result of cv2.imread() or read() call after cv2.VideoCapture())
-        :param nms_threshold: Non Maximal Threshold for YOLO object detector
+        :param image: An image or video frame
+        :param nms_threshold: Non Maximal Threshold
         :param confidence_threshold: Minimum confidence threshold below which all boxes should be discarded
 
         :return: List of person bounding boxes ([[x, y, w, h, confidence], ...])
@@ -167,4 +167,4 @@ In order to add a new person detector, you need to do the following,
 - [x] Add instructions to add custom person detector into the project
 
 # Collaboration
-The pull requests are welcome. Please email me at **mmaaz60@gmail.com** if you have any questions.
+The pull requests are welcome. If you have any questions, please email me at **mmaaz60@gmail.com**.
