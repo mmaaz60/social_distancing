@@ -1,11 +1,24 @@
+# Header, all configurations related to person_detector will be under this header
 person_detector:
+  # Name of the detector to be used for person detection,
+  # at this point only darknet yolo networks are supported using opencv dnn module.
   name: opencv_yolo
+  # Path to the yolo checkpoints directory. The checkpoints directory should contain three files
+  # 1. classed.txt: File containing the names of all classes of the network with one class name per line of file.
+  # 2. Darknet configuration (.cfg) file of the Yolo detection network
+  # 3. Darknet trained weights (.weights) file of the Yolo detection network
+  # These files can be downloaded from https://github.com/mmaaz60/darknet
   checkpoint_path: ./data/yolov4_tiny
 
-image_transformation: homography
-
+# Header, all configurations related to calibration should reside under this header
 calibration:
+  # Transformation type to be used to transform camera view image to the top view
+  # Only homography is supported at the moment
+  image_transformation: homography
+  # pickle file path to store the calibration (Transformation matrix and scale factor)
   pkl_file_path: ./data/calibration.pkl
 
+# Header, all configuration related to core social distancing algorithm should reside under this header
 social_distancing:
-  distance_threshold_ft: 4
+  # The maximum allowable distance between two persons in feet
+  distance_threshold_ft: 6

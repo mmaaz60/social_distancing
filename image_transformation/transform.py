@@ -4,7 +4,7 @@ import sys
 
 class Transform:
     def __init__(self):
-        if config.cfg["image_transformation"] == "homography":
+        if config.cfg["calibration"]["image_transformation"] == "homography":
             from image_transformation.homography import Homography as Transformation
         else:
             print(f"The requested transformation is not supported. Terminating")
