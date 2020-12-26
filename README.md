@@ -14,8 +14,9 @@ Note that the road is perfectly aligned in the above transformed image.
 - [x] Add Homography Image Transformation as a module to generate transformation matrix for bird eye view projection
 - [x] Add calibration tool to map camera image to bird eye view
 - [x] Develop an end-to-end application flow to detect social distancing violations using above tools
+- [ ] Add a bash script to run the end-to-end social distancing violation detector on a video
+- [ ] Add *requirements.txt*
 - [ ] Add instructions to add custom person detector into the project
-- [ ] Add instructions to add any other image transformation (e.g. perspective transformation etc.)
 
 # Collaboration
 I am looking for the resources to collaborate with me on this project. Please email me at **mmaaz60@gmail.com** if you want to collaborate with me on this project.
