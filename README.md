@@ -66,7 +66,7 @@ For the detailed description of the configuration parameters, please have a look
 # Running the Scripts
 
 ## calibrate.py
-This script is responsible for all the calibration process. Run it like,
+This script will perform the calibrations. Run it like,
 ```
 $ python calibrate.py -v <video_path> -n <num_points> -iter <num_iterations>
 ```
@@ -93,9 +93,40 @@ Then system will show you the transformed image. Now, you should press ENTER to 
 1. That's all, now the system will save the calibration pkl file in at the path mentioned in the configuration file [config.yml](config.yml).
 
 ## violation_detection.py
+This script will run the social distancing violation logic on a video and produced the violation video. 
+The script will draw a red line between two persons for which social distance violation is detected.
+Run the script as,
+```
+$ python violation_detection.py -v <video_path>
+```
+Where **<video_path>** is the camera video file path. 
+The output video is saved in the same directory containing the video file.
+
+For help, run
+```
+$ python violation_detection.py --help
+```
 
 ## runme.sh
+This bash script is developed to provide an interactive way of performing calibration and running social distancing violation logic on a video. 
+Follow the below instructions,
 
+1. Make the script executable
+```
+$ sudo chmod +x ./runme.sh
+```
+1. Run the script as
+```
+$ ./runme.sh <python_executable_path> <video_file_path> <calibration_file_path>
+```
+Note that the script expect three (3) positional arguments, where the third argument (*calibration_file_path*) is optional. 
+If provided, the system will use this calibration file for core logic, otherwise the system will ask the user to perform the calibration first.
+
+For help, run
+```
+$ ./runme help
+```
+**NOTE:** *runme.sh* script is the preferred method of accessing the functionality of this repository.
 
 # TODO
 - [x] Add OpenCV darknet Yolov3 as person detector
@@ -104,7 +135,8 @@ Then system will show you the transformed image. Now, you should press ENTER to 
 - [x] Develop an end-to-end application flow to detect social distancing violations using above tools
 - [x] Add a bash script to run the end-to-end social distancing violation detector on a video
 - [x] Add *requirements.txt*
-- [ ] Add complete instructions to run the code in the README  
+- [x] Add complete instructions to run the code in the README
+- [ ] Add demo video link and instructions to run the demo 
 - [ ] Add instructions to add custom person detector into the project
 
 # Collaboration
