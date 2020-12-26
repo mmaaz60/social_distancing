@@ -1,6 +1,13 @@
 # Social Distancing
 This repository implements the social distancing violation detection to reduce the spread of COVID-19 and other diseases by ensuring social distancing in public places including shopping malls, hospitals and restaurants.
 
+# Demo
+A demo video can be found at https://youtu.be/gXX8fuQbUFI. 
+Note that **Yolov4-tiny** has been used as person detector in this demo video. 
+The *yolo.weights*, *yolo.cfg*, and *classes.txt* files can be found at [yolov4-tiny](https://drive.google.com/drive/folders/17R-8klyLgYH2b7Fy7ZJ6Sd1k2lr3-zEv?usp=sharing). 
+The non-annotated video can also be found at [non_annotated_video](https://drive.google.com/file/d/1EWGd1HvjlFfe0mFnYk0l3qjBnKu3gTcY/view?usp=sharing). 
+A sample calibration file for this video can be found at [calibration.pkl](https://drive.google.com/file/d/1bRxsVk5CrfMuyebWEbhqnxDKvkKpd5TL/view?usp=sharing).
+
 # Calibration
 Two types of calibrations are needed for this application.
 1. Calibration for estimating the **transformation matrix** to transform camera view image to top view
@@ -128,7 +135,10 @@ $ ./runme help
 ```
 **NOTE:** *runme.sh* script is the preferred method of accessing the functionality of this repository.
 
-# TODO
+# Adding a Custom Person Detector
+
+
+# Progress
 - [x] Add OpenCV darknet Yolov3 as person detector
 - [x] Add Homography Image Transformation as a module to generate transformation matrix for bird eye view projection
 - [x] Add calibration tool to map camera image to bird eye view
@@ -136,8 +146,8 @@ $ ./runme help
 - [x] Add a bash script to run the end-to-end social distancing violation detector on a video
 - [x] Add *requirements.txt*
 - [x] Add complete instructions to run the code in the README
-- [ ] Add demo video link and instructions to run the demo 
+- [x] Add demo video link and other required resources to reproduce the demo results.
 - [ ] Add instructions to add custom person detector into the project
 
 # Collaboration
-I am looking for the resources to collaborate with me on this project. Please email me at **mmaaz60@gmail.com** if you want to collaborate with me on this project.
+The pull requests are welcome. Please email me at **mmaaz60@gmail.com** if you have any questions.
