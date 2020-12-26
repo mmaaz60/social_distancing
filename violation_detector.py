@@ -10,6 +10,8 @@ from person_detector.detector import Detector
 def parse_arguments():
     ap = argparse.ArgumentParser()
     ap.add_argument("-v", "--video_path", required=True, help="Path to video file.")
+    ap.add_argument("-c", "--calibration_file_path", required=False, default="",
+                    help="Path to the calibration pkl file path.")
 
     return vars(ap.parse_args())
 
@@ -36,9 +38,11 @@ def main():
     # Parse the arguments
     args = parse_arguments()
     video_path = args["video_path"]
+    pkl_file_path = args["calibration_file_path"]
     output_video_path = f"{video_path.split('.')[0]}_output.avi"
     # Load the transformation matrix and scale factor from the pkl file
-    pkl_file_path = config.cfg["calibration"]["pkl_file_path"]
+    if pkl_file_path == "":
+        pkl_file_path = config.cfg["calibration"]["pkl_file_path"]
     with open(pkl_file_path, 'rb') as f:
         transformation_matrix, scale_factor = pickle.load(f)
     # Initialize the person detector
