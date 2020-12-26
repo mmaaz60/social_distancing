@@ -136,7 +136,24 @@ $ ./runme help
 **NOTE:** *runme.sh* script is the preferred method of accessing the functionality of this repository.
 
 # Adding a Custom Person Detector
+All code related to `person_detector` can be found in the directory [person_detector](person_detector). 
+In order to add a new person detector, you need to do the following,
+1. Add a `.py` file (lets say `custom_person_detector.py`) in the `person_detector` directory. 
+   This file should implement a `CustomPersonDetector` class. The class must contain a method named `do_inference`. 
+   The signature of the `do_inference` method are mentioned below
+   ```
+   def do_inference(self, image, confidence_threshold, nms_threshold):
+        """
+        This function does inference on the image passed and return the person bounding boxes
 
+        :param image: A BGR numpy array (i.e. the result of cv2.imread() or read() call after cv2.VideoCapture())
+        :param nms_threshold: Non Maximal Threshold for YOLO object detector
+        :param confidence_threshold: Minimum confidence threshold below which all boxes should be discarded
+
+        :return: List of person bounding boxes ([[x, y, w, h, confidence], ...])
+        """
+   ```
+1. Add the detector in the [detector.py](person_detector/detector.py) file so that it can be used using the [config](config.yml) file.
 
 # Progress
 - [x] Add OpenCV darknet Yolov3 as person detector
@@ -147,7 +164,7 @@ $ ./runme help
 - [x] Add *requirements.txt*
 - [x] Add complete instructions to run the code in the README
 - [x] Add demo video link and other required resources to reproduce the demo results.
-- [ ] Add instructions to add custom person detector into the project
+- [x] Add instructions to add custom person detector into the project
 
 # Collaboration
 The pull requests are welcome. Please email me at **mmaaz60@gmail.com** if you have any questions.
